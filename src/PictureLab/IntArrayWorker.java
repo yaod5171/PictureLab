@@ -100,5 +100,52 @@ public class IntArrayWorker
       }
     }
   }
+  
+  /**
+   * Method to count the number of times an integer occurs
+   * @param query the integer to find
+   * @return the count
+   */
+  public int getCount(int query) {
+      int count = 0;
+      for (int[] row: matrix) {
+          for (int n: row) {
+              if (n == query) {
+                  count++;
+              }
+          }
+      }
+      return count;
+  }
+  
+  /**
+   * Method to return the largest integer in the array
+   * @return the largest value
+   */
+  public int getLargest() {
+      int largest = matrix[0][0];
+      for (int[] row: matrix) {
+          for (int n: row) {
+              if (n>largest) {
+                  largest = n;
+              }
+          }
+      }
+      return largest;
+  }
+  
+  /**
+   * Method to sum a column of the array
+   * @param col the column index
+   * @return the sum of the column
+   */
+  public int getColTotal(int col) {
+      int sum = 0;
+      for (int[] row: matrix) {
+          sum += row[col];
+      }
+      return sum;
+  }
+  
  
 }
