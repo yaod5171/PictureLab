@@ -155,7 +155,61 @@ public class Picture extends SimplePicture {
             }
         }
     }
+    
+    /**
+     * Method that mirrors the picture around a vertical mirror in the center of
+     * the picture from right to left
+     */
+    public void mirrorVerticalRightToLeft() {
+        Pixel[][] pixels = this.getPixels2D();
+        Pixel leftPixel = null;
+        Pixel rightPixel = null;
+        int width = pixels[0].length;
+        for (int row = 0; row < pixels.length; row++) {
+            for (int col = 0; col < width / 2; col++) {
+                leftPixel = pixels[row][col];
+                rightPixel = pixels[row][width - 1 - col];
+                leftPixel.setColor(rightPixel.getColor());
+            }
+        }
+    }
 
+    /**
+     * Method that mirrors the picture around a horizontal mirror in the center 
+     * of the picture from top to bottom
+     */
+    public void mirrorHorizontal() {
+        Pixel[][] pixels = this.getPixels2D();
+        Pixel topPixel = null;
+        Pixel botPixel = null;
+        int height = pixels.length;
+        for (int row = 0; row < height / 2; row++) {
+            for (int col = 0; col < pixels[0].length; col++) {
+                topPixel = pixels[row][col];
+                botPixel = pixels[height - 1 - row][col];
+                botPixel.setColor(topPixel.getColor());
+            }
+        }
+    }
+    
+    /**
+     * Method that mirrors the picture around a diagonal mirror in the center of
+     * the picture from bottom left to top right
+     */
+    public void mirrorDiagonal() {
+        Pixel[][] pixels = this.getPixels2D();
+        Pixel topPixel = null;
+        Pixel botPixel = null;
+        int minDim = Math.min(pixels.length, pixels[0].length);
+        for (int row = 0; row < minDim; row++) {
+            for (int col = 0; col < row; col++) {
+                topPixel = pixels[row][col];
+                botPixel = pixels[col][row];
+                botPixel.setColor(topPixel.getColor());
+            }
+        }
+    }
+    
     /**
      * Mirror just part of a picture of a temple
      */

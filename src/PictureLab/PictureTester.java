@@ -8,12 +8,17 @@ package PictureLab;
  * @author Barbara Ericson
  */
 public class PictureTester {
-
+    
+    private static final String picture = "beach.jpg";
+    
+    /**
+     * Control method; test the original image
+     */
     /**
      * Method to test zeroBlue
      */
     public static void testZeroBlue() {
-        Picture beach = new Picture("beach.jpg");
+        Picture beach = new Picture(picture);
         beach.explore();
         beach.zeroBlue();
         beach.explore();
@@ -23,7 +28,7 @@ public class PictureTester {
      * Method to test keepOnlyBlue
      */
     public static void testKeepOnlyBlue() {
-        Picture beach = new Picture("beach.jpg");
+        Picture beach = new Picture(picture);
         beach.explore();
         beach.keepOnlyBlue();
         beach.explore();
@@ -33,7 +38,7 @@ public class PictureTester {
      * Method to test negate
      */
     public static void testNegate() {
-        Picture beach = new Picture("beach.jpg");
+        Picture beach = new Picture(picture);
         beach.explore();
         beach.negate();
         beach.explore();
@@ -43,7 +48,7 @@ public class PictureTester {
      * Method to test negate
      */
     public static void testGrayscale() {
-        Picture beach = new Picture("beach.jpg");
+        Picture beach = new Picture(picture);
         beach.explore();
         beach.grayscale();
         beach.explore();
@@ -53,11 +58,42 @@ public class PictureTester {
      * Method to test mirrorVertical
      */
     public static void testMirrorVertical() {
-        Picture caterpillar = new Picture("caterpillar.jpg");
-        caterpillar.explore();
-        caterpillar.mirrorVertical();
-        caterpillar.explore();
+        Picture image = new Picture(picture);
+        image.explore();
+        image.mirrorVertical();
+        image.explore();
     }
+    
+    /**
+     * Method to test mirrorVerticalRightToLeft
+     */
+    public static void testMirrorVerticalRightToLeft() {
+        Picture image = new Picture(picture);
+        image.explore();
+        image.mirrorVerticalRightToLeft();
+        image.explore();
+    }
+    
+    /**
+     * Method to test mirrorHorizontal
+     */
+    public static void testMirrorHorizontal() {
+        Picture image = new Picture(picture);
+        image.explore();
+        image.mirrorHorizontal();
+        image.explore();
+    }
+    
+    /**
+     * Method to test Diagonal
+     */
+    public static void testMirrorDiagonal() {
+        Picture image = new Picture(picture);
+        image.explore();
+        image.mirrorDiagonal();
+        image.explore();
+    }
+
 
     /**
      * Method to test mirrorTemple
@@ -94,14 +130,17 @@ public class PictureTester {
         // uncomment a call here to run a test
         // and comment out the ones you don't want
         // to run
-        testZeroBlue();
-        testKeepOnlyBlue();
+        //testZeroBlue();
+        //testKeepOnlyBlue();
         //testKeepOnlyRed();
         //testKeepOnlyGreen();
-        testNegate();
-        testGrayscale();
+        //testNegate();
+        //testGrayscale();
         //testFixUnderwater();
         //testMirrorVertical();
+        //testMirrorVerticalRightToLeft();
+        //testMirrorHorizontal();
+        testMirrorDiagonal();
         //testMirrorTemple();
         //testMirrorArms();
         //testMirrorGull();
