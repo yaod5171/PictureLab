@@ -9,7 +9,7 @@ package PictureLab;
  */
 public class PictureTester {
     
-    private static final String picture = "beach.jpg";
+    private static final String picture = "redMotorcycle.jpg";
     
     /**
      * Control method; test the original image
@@ -18,40 +18,40 @@ public class PictureTester {
      * Method to test zeroBlue
      */
     public static void testZeroBlue() {
-        Picture beach = new Picture(picture);
-        beach.explore();
-        beach.zeroBlue();
-        beach.explore();
+        Picture image = new Picture(picture);
+        image.explore();
+        image.zeroBlue();
+        image.explore();
     }
 
     /**
      * Method to test keepOnlyBlue
      */
     public static void testKeepOnlyBlue() {
-        Picture beach = new Picture(picture);
-        beach.explore();
-        beach.keepOnlyBlue();
-        beach.explore();
+        Picture image = new Picture(picture);
+        image.explore();
+        image.keepOnlyBlue();
+        image.explore();
     }
 
     /**
      * Method to test negate
      */
     public static void testNegate() {
-        Picture beach = new Picture(picture);
-        beach.explore();
-        beach.negate();
-        beach.explore();
+        Picture image = new Picture(picture);
+        image.explore();
+        image.negate();
+        image.explore();
     }
 
     /**
      * Method to test negate
      */
     public static void testGrayscale() {
-        Picture beach = new Picture(picture);
-        beach.explore();
-        beach.grayscale();
-        beach.explore();
+        Picture image = new Picture(picture);
+        image.explore();
+        image.grayscale();
+        image.explore();
     }
 
     /**
@@ -104,6 +104,26 @@ public class PictureTester {
         temple.mirrorTemple();
         temple.explore();
     }
+    
+    /**
+     * Method to test mirrorArms
+     */
+    public static void testMirrorArms() {
+        Picture snowman = new Picture("snowman.jpg");
+        snowman.explore();
+        snowman.mirrorArms();
+        snowman.explore();
+    }
+    
+    /**
+     * Method to test mirrorGull
+     */
+    public static void testMirrorGull() {
+        Picture seagull = new Picture("seagull.jpg");
+        seagull.explore();
+        seagull.mirrorGull();
+        seagull.explore();
+    }
 
     /**
      * Method to test the collage method
@@ -118,9 +138,10 @@ public class PictureTester {
      * Method to test edgeDetection
      */
     public static void testEdgeDetection() {
-        Picture swan = new Picture("swan.jpg");
-        swan.edgeDetection(10);
-        swan.explore();
+        Picture image = new Picture(picture);
+        image.explore();
+        image.edgeDetection(20);
+        image.explore();
     }
 
     /**
@@ -140,10 +161,10 @@ public class PictureTester {
         //testMirrorVertical();
         //testMirrorVerticalRightToLeft();
         //testMirrorHorizontal();
-        testMirrorDiagonal();
+        //testMirrorDiagonal();
         //testMirrorTemple();
         //testMirrorArms();
-        //testMirrorGull();
+        testMirrorGull();
         //testMirrorDiagonal();
         //testCollage();
         //testCopy();
