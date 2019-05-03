@@ -9,7 +9,7 @@ package PictureLab;
  */
 public class PictureTester {
     
-    private static final String picture = "CumberlandIsland.jpg";
+    private static final String picture = "swan.jpg";
     
     /**
      * Control method; test the original image
@@ -152,8 +152,7 @@ public class PictureTester {
      */
     public static void testEdgeDetection() {
         Picture image = new Picture(picture);
-        image.explore();
-        image.edgeDetection(20);
+        image.edgeDetection(10);
         image.explore();
     }
 
@@ -165,7 +164,7 @@ public class PictureTester {
         // and comment out the ones you don't want
         // to run
         
-        //testPicture();
+        testPicture();
         //testZeroBlue();
         //testKeepOnlyBlue();
         //testKeepOnlyRed();
@@ -181,9 +180,9 @@ public class PictureTester {
         //testMirrorArms();
         //testMirrorGull();
         //testCollage();
-        testMyCollage();
+        //testMyCollage();
         //testCopy();
-        //testEdgeDetection();
+        testEdgeDetection();
         //testEdgeDetection2();
         //testChromakey();
         //testEncodeAndDecode();

@@ -413,24 +413,29 @@ public class Picture extends SimplePicture {
      * @param edgeDist the distance for finding edges
      */
     public void edgeDetection(int edgeDist) {
-        Pixel leftPixel = null;
+        Pixel thisPixel = null;
         Pixel rightPixel = null;
+        Pixel botPixel = null;
         Pixel[][] pixels = this.getPixels2D();
         Color rightColor = null;
-        for (int row = 0; row < pixels.length; row++) {
+        Color botColor = null;
+        for (int row = 0; row < pixels.length - 1; row++) {
             for (int col = 0;
                     col < pixels[0].length - 1; col++) {
-                leftPixel = pixels[row][col];
+                thisPixel = pixels[row][col];
                 rightPixel = pixels[row][col + 1];
+                botPixel = pixels[row + 1][col];
                 rightColor = rightPixel.getColor();
-                if (leftPixel.colorDistance(rightColor)
-                        > edgeDist) {
-                    leftPixel.setColor(Color.BLACK);
+                botColor = botPixel.getColor();
+                if (thisPixel.colorDistance(rightColor) > edgeDist ||
+                        thisPixel.colorDistance(botColor) > edgeDist) {
+                    thisPixel.setColor(Color.BLACK);
                 } else {
-                    leftPixel.setColor(Color.WHITE);
+                    thisPixel.setColor(Color.WHITE);
                 }
             }
         }
+        
     }
 
     /* Main method for testing - each class in Java can have a main 
