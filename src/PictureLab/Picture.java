@@ -108,6 +108,32 @@ public class Picture extends SimplePicture {
     }
     
     /**
+     * Method to set blue and green to 0
+     */
+    public void keepOnlyRed() {
+        Pixel[][] pixels = this.getPixels2D();
+        for (Pixel[] rowArray : pixels) {
+            for (Pixel pixelObj : rowArray) {
+                pixelObj.setBlue(0);
+                pixelObj.setGreen(0);
+            }
+        }
+    }
+    
+    /**
+     * Method to set red and blue to 0
+     */
+    public void keepOnlyGreen() {
+        Pixel[][] pixels = this.getPixels2D();
+        for (Pixel[] rowArray : pixels) {
+            for (Pixel pixelObj : rowArray) {
+                pixelObj.setRed(0);
+                pixelObj.setBlue(0);
+            }
+        }
+    }
+    
+    /**
      * Method to invert all colors
      */
     public void negate() {
@@ -289,7 +315,35 @@ public class Picture extends SimplePicture {
         }
         System.out.println(count);
     }
+    
+    /**
+     * Copy a part of another picture
+     * @param image the picture to copy from
+     * @param x1 x-coordinate of the top left corner of the copied area
+     * @param y1 y-coordinate of the top left corner of the copied area
+     * @param x2 x-coordinate of the bottom right corner of the copied area
+     * @param y2 y-coordinate of the bottom right corner of the copied area
+     * @param dx x-coordinate of the top left corner of the area to copy to
+     * @param dy y-coordinate of the top left corner of the area to copy to
+     */
+    public void copy(Picture image, int x1, int y1, int x2, int y2, int dx, int dy) {
+        Pixel fromPixel = null;
+        Pixel toPixel = null;
+        Pixel[][] pixels = this.getPixels2D();
+        Pixel[][] copyFrom = image.getPixels2D();
 
+        // loop through the rows
+        for (int row = y1; row < y2; row++) {
+            // loop from 13 to just before the mirror point
+            for (int col = x1; col < x2; col++) {
+                fromPixel = copyFrom[row][col];
+                toPixel = pixels[dy + row - y1][dx + col - x1];
+                toPixel.setColor(fromPixel.getColor());
+            }
+        }
+    }
+    
+    
     /**
      * copy from the passed fromPic to the specified startRow and startCol in
      * the current picture
@@ -335,6 +389,22 @@ public class Picture extends SimplePicture {
         this.copy(flower2, 500, 0);
         this.mirrorVertical();
         this.write("collage.jpg");
+    }
+    
+    /**
+     * Method to create another collage of several pictures
+     */
+    public void myCollage() {
+        Picture door = new Picture("thruDoor.jpg");
+        Picture island = new Picture("cumberlandIsland.jpg");
+        door.keepOnlyRed();
+        this.copy(door, 0, 0);
+        island.zeroBlue();
+        this.copy(island, 144, 192, 326, 523, 144, 192);
+        Picture robot = new Picture("robot.jpg");
+        robot.mirrorVertical();
+        this.copy(robot, 450, 210);
+        Picture kitten = new Picture("kitten2.jpg");
     }
 
     /**
