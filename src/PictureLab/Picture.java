@@ -15,7 +15,7 @@ import java.util.List; // resolves problem with java.awt.List and java.util.List
  * @author Barbara Ericson ericson@cc.gatech.edu
  */
 public class Picture extends SimplePicture {
-  ///////////////////// constructors //////////////////////////////////
+    ///////////////////// constructors //////////////////////////////////
 
     /**
      * Constructor that takes no arguments
@@ -67,7 +67,7 @@ public class Picture extends SimplePicture {
         super(image);
     }
 
-  ////////////////////// methods ///////////////////////////////////////
+    ////////////////////// methods ///////////////////////////////////////
     /**
      * Method to return a string with information about this picture.
      *
@@ -106,7 +106,7 @@ public class Picture extends SimplePicture {
             }
         }
     }
-    
+
     /**
      * Method to set blue and green to 0
      */
@@ -119,7 +119,7 @@ public class Picture extends SimplePicture {
             }
         }
     }
-    
+
     /**
      * Method to set red and blue to 0
      */
@@ -132,7 +132,7 @@ public class Picture extends SimplePicture {
             }
         }
     }
-    
+
     /**
      * Method to invert all colors
      */
@@ -146,7 +146,7 @@ public class Picture extends SimplePicture {
             }
         }
     }
-    
+
     /**
      * Method to convert to grayscale
      */
@@ -155,11 +155,11 @@ public class Picture extends SimplePicture {
         for (Pixel[] rowArray : pixels) {
             for (Pixel pixelObj : rowArray) {
                 int[] col = {pixelObj.getRed(), pixelObj.getGreen(), pixelObj.getBlue()};
-                int avg = (col[0] + col[1] + col[2])/3;
+                int avg = (col[0] + col[1] + col[2]) / 3;
                 pixelObj.setRed(avg);
                 pixelObj.setGreen(avg);
                 pixelObj.setBlue(avg);
-                
+
             }
         }
     }
@@ -181,7 +181,7 @@ public class Picture extends SimplePicture {
             }
         }
     }
-    
+
     /**
      * Method that mirrors the picture around a vertical mirror in the center of
      * the picture from right to left
@@ -201,7 +201,7 @@ public class Picture extends SimplePicture {
     }
 
     /**
-     * Method that mirrors the picture around a horizontal mirror in the center 
+     * Method that mirrors the picture around a horizontal mirror in the center
      * of the picture from top to bottom
      */
     public void mirrorHorizontal() {
@@ -217,7 +217,7 @@ public class Picture extends SimplePicture {
             }
         }
     }
-    
+
     /**
      * Method that mirrors the picture around a diagonal mirror in the center of
      * the picture from bottom left to top right
@@ -235,7 +235,7 @@ public class Picture extends SimplePicture {
             }
         }
     }
-    
+
     /**
      * Mirror just part of a picture of a temple
      */
@@ -259,7 +259,7 @@ public class Picture extends SimplePicture {
         }
         System.out.println(count);
     }
-    
+
     /**
      * Mirror a snowman's arms
      */
@@ -279,7 +279,7 @@ public class Picture extends SimplePicture {
                 botPixel.setColor(topPixel.getColor());
             }
         }
-        
+
         // loop through the rows
         for (int row = 159; row < mirrorPoint; row++) {
             // loop from 13 to just before the mirror point
@@ -291,7 +291,7 @@ public class Picture extends SimplePicture {
             }
         }
     }
-    
+
     /**
      * Mirror a gull
      */
@@ -315,9 +315,10 @@ public class Picture extends SimplePicture {
         }
         System.out.println(count);
     }
-    
+
     /**
      * Copy a part of another picture
+     *
      * @param image the picture to copy from
      * @param x1 x-coordinate of the top left corner of the copied area
      * @param y1 y-coordinate of the top left corner of the copied area
@@ -342,8 +343,7 @@ public class Picture extends SimplePicture {
             }
         }
     }
-    
-    
+
     /**
      * copy from the passed fromPic to the specified startRow and startCol in
      * the current picture
@@ -390,7 +390,7 @@ public class Picture extends SimplePicture {
         this.mirrorVertical();
         this.write("collage.jpg");
     }
-    
+
     /**
      * Method to create another collage of several pictures
      */
@@ -427,15 +427,53 @@ public class Picture extends SimplePicture {
                 botPixel = pixels[row + 1][col];
                 rightColor = rightPixel.getColor();
                 botColor = botPixel.getColor();
-                if (thisPixel.colorDistance(rightColor) > edgeDist ||
-                        thisPixel.colorDistance(botColor) > edgeDist) {
+                if (thisPixel.colorDistance(rightColor) > edgeDist
+                        || thisPixel.colorDistance(botColor) > edgeDist) {
                     thisPixel.setColor(Color.BLACK);
                 } else {
                     thisPixel.setColor(Color.WHITE);
                 }
             }
         }
-        
+    }
+
+    /**
+     * Method to blur a specified area.
+     *
+     * @param x the x-coordinate of the top left corner of the area
+     * @param y the y-coordinate of the top left corner of the area
+     * @param w the width of the area
+     * @param h the height of the area
+     */
+    public void blur(int x, int y, int w, int h) {
+        Pixel[][] pixels = this.getPixels2D();
+        int ph = pixels.length;
+        int pw = pixels[0].length;
+        int red, green, blue = 0;
+        int count = 0;
+
+        for (int i = x; i < x + w; i++) {
+            for (int j = y; j < y + h; j++) {
+                red = green = blue = 0;
+                count = 0;
+                for (int A : new int[]{-1, 0, 1}) {
+                    int a = A + i;
+                    for (int B : new int[]{-1, 0, 1}) {
+                        int b = B + j;
+                        if (0 <= a && a < pw && 0 <= b && b < ph) {
+                            red += pixels[a][b].getRed();
+                            green += pixels[a][b].getGreen();
+                            blue += pixels[a][b].getBlue();
+                            count++;
+                        }
+                    }
+                }
+                red /= count;
+                green /= count;
+                blue /= count;
+                pixels[i][j].setColor(new Color(red, green, blue));
+            }
+        }
     }
 
     /* Main method for testing - each class in Java can have a main 

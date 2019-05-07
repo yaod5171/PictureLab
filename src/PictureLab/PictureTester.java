@@ -9,7 +9,7 @@ package PictureLab;
  */
 public class PictureTester {
     
-    private static final String picture = "swan.jpg";
+    private static final String picture = "redMotorcycle.jpg";
     
     /**
      * Control method; test the original image
@@ -155,6 +155,18 @@ public class PictureTester {
         image.edgeDetection(10);
         image.explore();
     }
+    
+    /**
+     * Method to test blur
+     */
+    public static void testBlur(int x, int y, int w, int h, int n) {
+        Picture redMoto = new Picture("redMotorcycle.jpg");
+        for (int i = 0; i < n; i++) {
+            redMoto.blur(x, y, w, h);
+        }
+        redMoto.explore();
+    }
+
 
     /**
      * Main method for testing. Every class can have a main method in Java
@@ -182,7 +194,7 @@ public class PictureTester {
         //testCollage();
         //testMyCollage();
         //testCopy();
-        testEdgeDetection();
+        //testEdgeDetection();
         //testEdgeDetection2();
         //testChromakey();
         //testEncodeAndDecode();
@@ -190,5 +202,6 @@ public class PictureTester {
         //testSetRedToHalfValueInTopHalf();
         //testClearBlueOverValue(200);
         //testGetAverageForColumn(0);
+        testBlur(180, 160, 25, 25, 10);
     }
 }
